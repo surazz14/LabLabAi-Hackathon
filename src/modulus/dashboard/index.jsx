@@ -10,9 +10,6 @@ function Dashboard() {
   const [response, setResponse] = React.useState('');
   const [budget, setBudget] = React.useState('');
 
-
-console.log("this is assistant",assistant)
-
   const onSubmit = ()=>{
     console.log("this is message",message)
   
