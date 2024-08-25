@@ -1,6 +1,6 @@
 import React from "react";
-// import { AssistantV1 } from 'ibm-watson/assistant/v1';
-// import { IamAuthenticator } from 'ibm-watson/auth';
+import axios from "axios";
+
 import Navigation from "../../common/component/navigation/index";
 import TextField from "@material-ui/core/TextField";
 import { Box, Button } from "@material-ui/core";
@@ -8,13 +8,27 @@ import { Box, Button } from "@material-ui/core";
 function Dashboard() {
   const [message,setMessages] = React.useState("")
   const [response, setResponse] = React.useState('');
-  const [budget, setBudget] = React.useState('');
 
-  const onSubmit = ()=>{
-    console.log("this is message",message)
-  
-    }
-
+  const onSubmit = async()=>{
+    try {
+      const response = await axios.post(
+        'http://localhost:5000/api/message',
+        {
+          message: message
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.WATSON_API_KEY}`,
+          },
+        }
+      );
+        setResponse(response)
+    } catch (err) {
+      console.error('Error in getting response:', err);
+    }    
+  }
+console.log("this is response",response)
   return (
     <>
       <Navigation />
