@@ -3,6 +3,8 @@ import Box from "@material-ui/core/Box";
 
 import routes from ".";
 import apphistory from "../../apphistory";
+import { ResponseProvider } from "../context/ResponseContext"; // Import ResponseProvider
+
 
 function RouterSwitch() {
   return (
@@ -17,9 +19,11 @@ function RouterSwitch() {
 const Router = () => {
   return (
     <BrowserRouter history={apphistory}>
+      <ResponseProvider>
       <Box>
         <RouterSwitch />
       </Box>
+      </ResponseProvider>
     </BrowserRouter>
   );
 };
